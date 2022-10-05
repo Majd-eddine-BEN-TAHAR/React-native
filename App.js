@@ -1,42 +1,56 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-} from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
+  const [goal, setGoal] = useState("");
+  const inputHandler = (value) => {
+    setGoal(value);
+  };
+
+  const addGoal = () => {
+    console.log(goal);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.container1}>
-        <Text style={{ flex: 1, backgroundColor: "red" }}>hey</Text>
-        <Text style={{ flex: 2, backgroundColor: "blue" }}>hey</Text>
-        <Text style={{ flex: 3, backgroundColor: "yellow" }}>hey</Text>
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          onChangeText={inputHandler}
+        />
+        <Button title="Add Goal" onPress={addGoal} />
       </View>
-      <View style={styles.container2}>
-        <Text style={{ flex: 1, backgroundColor: "red" }}>hey</Text>
-        <Text style={{ flex: 1, backgroundColor: "blue" }}>hey</Text>
-        <Text style={{ flex: 1, backgroundColor: "yellow" }}>hey</Text>
+      <View style={styles.goalsContainer}>
+        <Text>List of goals...</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    marginTop: 30,
-    justifyContent: "space-around",
+  appContainer: {
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
-  container1: {
-    height: 100,
+  inputContainer: {
+    flex: 1,
     flexDirection: "row",
-    alignItems: "stretch",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
   },
-  container2: {
-    height: 200,
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+  },
+  goalsContainer: {
+    flex: 5,
   },
 });
